@@ -27,11 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'chat.User'
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/chat-admin/'
-LOGOUT_REDIRECT_URL = '/'
+# LOGIN_URL = '/login/'
+# LOGIN_REDIRECT_URL = '/chat-admin/'
+# LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'jatte.urls'
+ROOT_URLCONF = 'src.urls'
 
 TEMPLATES = [
     {
@@ -80,8 +80,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'jatte.wsgi.application'
-ASGI_APPLICATION = 'jatte.asgi.application'
+WSGI_APPLICATION = 'src.wsgi.application'
+ASGI_APPLICATION = 'src.asgi.application'
 
 
 # Database
