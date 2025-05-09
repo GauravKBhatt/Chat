@@ -40,11 +40,10 @@ class Room(LoginRequiredMixin,View):
     
     def post(self,request,*args,**kwargs):
         
-        name = request.POST.get('name','')
-        url = request.POST.get('url','')
-
+        url = kwargs.POST.get('url','')
         uuid = kwargs.get('uuid')
-
+        name = kwargs.get('name','')
+        
         Room.objects.create(uuid=uuid,client=name,url=url)
 
         return JsonResponse({'message':'room created'})
