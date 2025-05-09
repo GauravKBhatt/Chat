@@ -1,0 +1,17 @@
+<div >
+        {% for room in rooms %}
+            <!-- change the color of this div according to the status of the room. -->
+        <div>                
+                <h3 >Chat</h3>
+                <p>
+                    <b>ID:</b>{{ room.uuid }}<br>
+                    <b>Name:</b>{{ room.client}}<br>
+                    <b>Name:</b>{{ room.get_status_display }}<br>
+                    <b>Name:</b>{% firstof room.agent.name 'None yet...'%}<br>
+                </p>
+                <a href="{% url 'chat:room' room.uuid %}" class="mt-4 inline-block py-2 px-6 bg-pink-800 text-black rounded-xl">Join</a>
+
+                <a href="{% url 'chat:delete_room' room.uuid %}" class="mt-4 inline-block py-2 px-6 bg-rose-800 text-black rounded-xl">Delete Room</a>
+            </div>
+        {% endfor%}
+    </div>
