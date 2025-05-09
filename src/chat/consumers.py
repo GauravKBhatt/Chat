@@ -64,7 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         if type == 'message':
             new_message = await self.create_message(name,message,agent)
-            # triggers the chat_message function
+            # triggers the chat_message function by creating an event. 
             await self.channel_layer.group_send(self.room_group_name,{
                 'type':'chat_message',
                 'message':message,
@@ -76,7 +76,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         elif type =='update':
             print('is update')
-            # triggers the writing_active function.
+            # triggers the writing_active function by creating an event. 
             await self.channel_layer.group_send(
                 self.room_group_name,{
                     'type':'writing_active',

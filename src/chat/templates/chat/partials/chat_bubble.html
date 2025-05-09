@@ -1,0 +1,24 @@
+{% csrf_token %}
+
+<div id="chat" >
+    <div id="chat_icon">
+        <button id="chat_open" >
+            everything else should be hidden before this button is clicked but that functionality will be added later.         
+        </button>
+    </div>
+
+    <div id="chat_welcome" >
+        <input type="text" name="name" id="chat_name"  placeholder="Your name...">
+
+        <button id="chat_join" >Join chat</button>
+    </div>
+
+    <div id="chat_room" >
+        <div id="chat_log" >
+            <p>Welcome to our chat! Please type your message and wait for an agent to join...</p>
+        </div>
+
+        <input type="text" name="body" id="chat_message_input"  placeholder="Type your message...">
+        <button id="chat_message_submit" >Send</button>
+    </div>
+</div>
