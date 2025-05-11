@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block content%}
+    <h1 >Chat Admin</h1>
+    {% if perms.user.add_user%}
+        <div >
+            <h2 >Users</h2>
+            <a href="{% url 'chat:add_user' %}" >Add users </a>
+        </div>
+        <div >
+        {% for user in users %}
+            <div >
+            <p >
+                <a href="{% url 'chat:user_detail' user.pk%}">{{user.name}}</a>
+            </p>
+            <p >{{user.email}}</p>
+            <p >{{user.get_role_display}}</p>
+            <p >
+                {% if perms.user.edit_user %}
+                <a href="{% url 'chat:edit_user' user.pk%}">Edit</a>
+                {% endif %}
+            </p>
+        </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <hr >
+    <div >
+        <h2 >Rooms</h2>
+        {% include 'chat/partials/room_list.html'%}
+    </div>
+{% endblock %}
