@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1 >{{ user.name }}</h1>
+
+    <hr >
+
+    <div >
+        <h2 >Rooms</h2>
+
+        {% include 'chat/partials/room_list.html' %}
+    </div>
+{% endblock %}

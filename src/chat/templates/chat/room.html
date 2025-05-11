@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% load static chatextras %}
+
+{% block content %}
+    <h1 >Room "{{ room.uuid }}"</h1>
+
+    <hr >
+
+    <p >
+        <b>Name: </b>{{ room.client }}<br>
+        <b>Started: </b>{{ room.created_at|timesince }} ago<br>
+        <b>Status: </b>{{ room.get_status_display }}<br>
+        <b>Page: </b>{{ room.url }}<br>
+        <b>Agent: </b>{% firstof room.agent.name 'None yet...' %}
+    </p>
+
+    <hr >
+
+    <div id="chat_log" >
+        {% for message in room.messages.all %}
+            <div >
+                {% if not message.created_by %}
+                    <div >
+                        {{ message.sent_by|initials }}
+                    </div>
+                {% endif %}
+
+                <div>
+                    <div >
+                        <p >{{ message.body }}</p>
+                    </div>
+
+                    <span >{{ message.created_at|timesince }} ago</span>
+                </div>
+
+                {% if message.created_by %}
+                    <div >
+                        {{ message.sent_by|initials }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if room.status == 'active' %}
+        <input type="text" name="body" id="chat_message_input" placeholder="Type your message...">
+        <button id="chat_message_submit" >Send</button>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {% if room.status == 'active' %}
+        <!-- THE VALUES ARE passed through json_script template filter. embeds the value into <script> tag -->
+        <!-- in the rendered html, it will look like this <script id="room_uuid" type="application/json">"7ac7289a-b645-4b20-9f7f-073f31b5e7f3"</script>-->
+        <!-- All of these embedded values are used main_admin.js -->
+        {{ room.uuid|json_script:'room_uuid' }}
+        {{ request.user.name|json_script:'user_name' }}
+        {{ request.user.id|json_script:'user_id' }}
+
+        <script src="{% static 'js/main_admin.js' %}"></script>
+    {% endif %}
+{% endblock %}
